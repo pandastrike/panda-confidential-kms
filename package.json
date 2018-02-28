@@ -1,0 +1,60 @@
+{
+  "name": "panda-confidential-kms",
+  "version": "0.0.1",
+  "description": "Extension to Panda-Confidential to leverage AWS KMS",
+  "main": "build/npm/src/index.js",
+  "files": [
+    "build/npm/src",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "coffee --transpile test/index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandastrike/panda-confidential-kms.git"
+  },
+  "keywords": [
+    "encryption",
+    "serverless",
+    "lambda",
+    "node",
+    "PKE",
+    "public key encryption",
+    "symmetric encryption",
+    "asymmetric encryption",
+    "KMS",
+    "panda sky"
+  ],
+  "contributors": [
+    {
+      "name": "Dan Yoder",
+      "email": "dan@pandastrike.com"
+    },
+    {
+      "name": "David Harper",
+      "email": "david@pandastrike.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pandastrike/panda-confidential-kms/issues"
+  },
+  "homepage": "https://github.com/pandastrike/panda-confidential-kms#readme",
+  "devDependencies": {
+    "amen": "^2.0.4",
+    "aws-sdk": "^2.200.0",
+    "coffeescript": "2.1.0",
+    "command-line-args": "^5.0.2",
+    "commander": "^2.14.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "panda-builder": "1.1.1",
+    "source-map-support": "^0.5.0"
+  },
+  "dependencies": {
+    "fairmont-helpers": "^3.3.2",
+    "fairmont-multimethods": "^2.0.2",
+    "panda-confidential": "file:../panda-confidential",
+    "sundog": ">=0.0.8 <0.1.0"
+  }
+}
