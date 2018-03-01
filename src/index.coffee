@@ -15,7 +15,7 @@ KMSExtension = (confidential, SDK) ->
   confidential.key.KMS = kmsKeyID
   confidential.key.isKMSKeyID = isKMSKeyID
 
-  {utils:{encode, decode, isData}, randomBytes, nacl} = confidential
+  {encode, decode, isData, randomBytes, nacl} = confidential
 
   # Extension to Symmetric Encryption that encrypts the key with KMS.
   Method.define confidential.encrypt, isKMSKeyID, isData,
