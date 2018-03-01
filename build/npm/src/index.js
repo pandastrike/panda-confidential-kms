@@ -46,11 +46,7 @@ KMSExtension = function (confidential, SDK) {
   // Extend the key-type interface
   confidential.key.KMS = _kmsKey.kmsKeyID;
   confidential.key.isKMSKeyID = _kmsKey.isKMSKeyID;
-  ({
-    utils: { encode, decode, isData },
-    randomBytes,
-    nacl
-  } = confidential);
+  ({ encode, decode, isData, randomBytes, nacl } = confidential);
   // Extension to Symmetric Encryption that encrypts the key with KMS.
   _fairmontMultimethods.Method.define(confidential.encrypt, _kmsKey.isKMSKeyID, isData, (() => {
     var _ref2 = _asyncToGenerator(function* ({ id }, plaintext) {
