@@ -14,6 +14,9 @@ npm install panda-confidential panda-confidential-kms --save
 ## Usage
 
 ```coffeescript
+import SDK from "aws-sdk"
+# Add your credentials to SDK.config
+
 import {confidential} from "panda-confidential"
 import KMS from "panda-confidential-kms"
 {randomBytes, key, decrypt, encrypt, randomBytes, encode} = KMS confidential(), SDK
