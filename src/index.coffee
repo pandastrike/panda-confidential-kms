@@ -1,12 +1,13 @@
 import Sundog from "sundog"
-import {isString} from "fairmont-helpers"
-import {Method} from "fairmont-multimethods"
+import {isString} from "panda-parchment"
+import {Method} from "panda-generics"
 import {isKMSKeyID, kmsKeyID} from "./kms-key"
 
 # Extend Confidential with KMS via sundog.
 KMSExtension = (confidential, SDK) ->
   # Access to the AWS API through the Sundog helper layer.
-  {AWS:KMS:{randomKey, encrypt:kmsEncrypt, decrypt:kmsDecrypt}} = Sundog SDK
+  {AWS:{KMS}} = Sundog SDK
+  {randomKey, encrypt:kmsEncrypt, decrypt:kmsDecrypt} = KMS()
 
   # Override TweetNaCl's local randomBytes method with KMS
   confidential.randomBytes = (length) -> await randomKey length, "buffer"

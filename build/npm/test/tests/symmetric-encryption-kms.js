@@ -3,62 +3,37 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _powerAssertRecorder = function () { function PowerAssertRecorder() { this.captured = []; } PowerAssertRecorder.prototype._capt = function _capt(value, espath) { this.captured.push({ value: value, espath: espath }); return value; }; PowerAssertRecorder.prototype._expr = function _expr(value, source) { var capturedValues = this.captured; this.captured = []; return { powerAssertContext: { value: value, events: capturedValues }, source: source }; }; return PowerAssertRecorder; }();
+var _assert = _interopRequireDefault(require("assert"));
 
-var _powerAssert = require("power-assert");
-
-var _powerAssert2 = _interopRequireDefault(_powerAssert);
-
-var _keyName = require("../key-name");
-
-var _keyName2 = _interopRequireDefault(_keyName);
+var _keyName = _interopRequireDefault(require("../key-name"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 var symmetric;
 
-symmetric = function ({ key, encrypt, decrypt }) {
-  return _asyncToGenerator(function* () {
-    var _rec = new _powerAssertRecorder(),
-        _rec2 = new _powerAssertRecorder(),
-        _rec3 = new _powerAssertRecorder(),
-        _rec4 = new _powerAssertRecorder();
+symmetric = function ({
+  key,
+  encrypt,
+  decrypt
+}) {
+  return async function () {
+    var cipher, keyID, message, output; // Create our custom key class to pass into Confidential.
 
-    var cipher, keyID, message, output;
-    // Create our custom key class to pass into Confidential.
-    keyID = key.KMS(_keyName2.default);
-    (0, _powerAssert2.default)(_rec._expr(_rec._capt(_rec._capt(keyID, "arguments/0/left") && _rec._capt(_rec._capt(key, "arguments/0/right/callee/object").isKMSKeyID(_rec._capt(keyID, "arguments/0/right/arguments/0")), "arguments/0/right"), "arguments/0"), {
-      content: "assert(keyID && key.isKMSKeyID(keyID), \"bad key\")",
-      filepath: "tests/symmetric-encryption-kms.coffee",
-      line: 7,
-      async: true
-    }), "bad key");
-    // Person A symmetrically encrypts their data.
+    keyID = key.KMS(_keyName.default);
+    (0, _assert.default)(keyID && key.isKMSKeyID(keyID), "bad key"); // Person A symmetrically encrypts their data.
+
     message = "Hello World!";
-    cipher = yield encrypt(keyID, message);
-    (0, _powerAssert2.default)(_rec2._expr(_rec2._capt(_rec2._capt(cipher, "arguments/0/left") && _rec2._capt(_rec2._capt(message, "arguments/0/right/left") !== _rec2._capt(cipher, "arguments/0/right/right"), "arguments/0/right"), "arguments/0"), {
-      content: "assert(cipher && message !== cipher, \"must create a ciphertext\")",
-      filepath: "tests/symmetric-encryption-kms.coffee",
-      line: 12,
-      async: true
-    }), "must create a ciphertext");
-    // Person A later decrypts that ciphertext.
-    output = yield decrypt(keyID, cipher);
-    return _powerAssert2.default.equal(_rec3._expr(_rec3._capt(message, "arguments/0"), {
-      content: "assert.equal(message, output, \"failed to decrypt\")",
-      filepath: "tests/symmetric-encryption-kms.coffee",
-      line: 16,
-      async: true
-    }), _rec4._expr(_rec4._capt(output, "arguments/1"), {
-      content: "assert.equal(message, output, \"failed to decrypt\")",
-      filepath: "tests/symmetric-encryption-kms.coffee",
-      line: 16,
-      async: true
-    }), "failed to decrypt");
-  });
+    cipher = await encrypt(keyID, message);
+    (0, _assert.default)(cipher && message !== cipher, "must create a ciphertext"); // Person A later decrypts that ciphertext.
+
+    output = await decrypt(keyID, cipher);
+    return _assert.default.equal(message, output, "failed to decrypt");
+  };
 };
 
-exports.default = symmetric;
+var _default = symmetric;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3RzL3N5bW1ldHJpYy1lbmNyeXB0aW9uLWttcy5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUNBOzs7O0FBREEsSUFBQSxTQUFBOztBQUdBLFNBQUEsR0FBWSxVQUFDO0FBQUEsRUFBQSxHQUFBO0FBQUEsRUFBQSxPQUFBO0FBQUQsRUFBQTtBQUFDLENBQUQsRUFBQTtTQUE2QixrQkFBQTtBQUV2QyxRQUFBLE1BQUEsRUFBQSxLQUFBLEVBQUEsT0FBQSxFQUFBLE1BQUEsQ0FGdUMsQzs7QUFFdkMsSUFBQSxLQUFBLEdBQVEsR0FBRyxDQUFILEdBQUEsQ0FBQSxnQkFBQSxDQUFSO0FBQ0EseUJBQVEsS0FBQSxJQUFTLEdBQUcsQ0FBSCxVQUFBLENBQWpCLEtBQWlCLENBQWpCLEVBREEsU0FDQSxFQUh1QyxDOztBQU12QyxJQUFBLE9BQUEsR0FBVSxjQUFWO0FBQ0EsSUFBQSxNQUFBLEdBQVMsTUFBTSxPQUFBLENBQUEsS0FBQSxFQUFOLE9BQU0sQ0FBZjtBQUNBLHlCQUFRLE1BQUEsSUFBVSxPQUFBLEtBQWxCLE1BQUEsRUFOQSwwQkFNQSxFQVJ1QyxDOztBQVd2QyxJQUFBLE1BQUEsR0FBUyxNQUFNLE9BQUEsQ0FBQSxLQUFBLEVBQU4sTUFBTSxDQUFmO1dBQ0EsZ0JBQUEsS0FBQSxDQUFBLE9BQUEsRUFBQSxNQUFBLEVBQUEsbUJBQUEsQztBQVp1QyxHO0FBQTdCLENBQVo7O2VBY2UsUyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBhc3NlcnQgZnJvbSBcImFzc2VydFwiXG5pbXBvcnQga21zS2V5TmFtZSBmcm9tIFwiLi4va2V5LW5hbWVcIlxuXG5zeW1tZXRyaWMgPSAoe2tleSwgZW5jcnlwdCwgZGVjcnlwdH0pIC0+IC0+XG4gICMgQ3JlYXRlIG91ciBjdXN0b20ga2V5IGNsYXNzIHRvIHBhc3MgaW50byBDb25maWRlbnRpYWwuXG4gIGtleUlEID0ga2V5LktNUyBrbXNLZXlOYW1lXG4gIGFzc2VydCAoa2V5SUQgJiYga2V5LmlzS01TS2V5SUQga2V5SUQpLCBcImJhZCBrZXlcIlxuXG4gICMgUGVyc29uIEEgc3ltbWV0cmljYWxseSBlbmNyeXB0cyB0aGVpciBkYXRhLlxuICBtZXNzYWdlID0gXCJIZWxsbyBXb3JsZCFcIlxuICBjaXBoZXIgPSBhd2FpdCBlbmNyeXB0IGtleUlELCBtZXNzYWdlXG4gIGFzc2VydCAoY2lwaGVyICYmIG1lc3NhZ2UgIT0gY2lwaGVyKSwgXCJtdXN0IGNyZWF0ZSBhIGNpcGhlcnRleHRcIlxuXG4gICMgUGVyc29uIEEgbGF0ZXIgZGVjcnlwdHMgdGhhdCBjaXBoZXJ0ZXh0LlxuICBvdXRwdXQgPSBhd2FpdCBkZWNyeXB0IGtleUlELCBjaXBoZXJcbiAgYXNzZXJ0LmVxdWFsIG1lc3NhZ2UsIG91dHB1dCwgXCJmYWlsZWQgdG8gZGVjcnlwdFwiXG5cbmV4cG9ydCBkZWZhdWx0IHN5bW1ldHJpY1xuIl0sInNvdXJjZVJvb3QiOiIifQ==
+//# sourceURL=tests/symmetric-encryption-kms.coffee
