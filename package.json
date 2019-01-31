@@ -8,7 +8,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "coffee --transpile test/index.coffee"
+    "test": "npx p9k npm:test"
   },
   "repository": {
     "type": "git",
@@ -43,9 +43,12 @@
   "homepage": "https://github.com/pandastrike/panda-confidential-kms#readme",
   "devDependencies": {
     "amen": "^2.0.4",
+    "aws-sdk": "^2.395.0",
+    "command-line-args": "^5.0.2",
     "panda-9000": "^4.4.0",
     "panda-builder": "^3.2.1",
-    "panda-confidential": "file:../panda-confidential"
+    "panda-confidential": "file:../panda-confidential",
+    "sundog": "^2.0.0"
   },
   "dependencies": {
     "panda-generics": "4.2.0",
