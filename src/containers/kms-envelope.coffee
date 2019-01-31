@@ -18,15 +18,16 @@ Container = ({Envelope, Ciphertext, convert}) ->
     @create: (envelope, lockedKey) -> new KMSEnvelope envelope, lockedKey
 
     @from: (hint, value) ->
-      new KMSEnvelope do ->
-        {lockedKey, envelope} =
-          if hint == "utf8"
-            fromJSON value
-          else
-            fromJSON convert from: hint, to: "utf8", value
+      {lockedKey, envelope} =
+        if hint == "utf8"
+          fromJSON value
+        else
+          fromJSON convert from: hint, to: "utf8", value
 
-        lockedKey: Ciphertext.from "base64", lockedKey
-        envelope: Envelope.from "base64", envelope
+      new KMSEnvelope(
+        Envelope.from "base64", envelope
+        Ciphertext.from "base64", lockedKey
+      )
 
     @isType: isType @
 

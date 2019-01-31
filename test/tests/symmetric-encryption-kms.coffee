@@ -12,7 +12,11 @@ symmetric = ({KMSKey, Message, KMSEnvelope, encrypt, decrypt}) -> ->
   envelope = await encrypt kmsKey, message
   assert (KMSEnvelope.isType envelope), "bad envelope"
 
+  # Person A can serialize the envelope
+  serializedEnvelope = envelope.to "base64"
+
   # Person A later decrypts that ciphertext.
+  envelope = KMSEnvelope.from "base64", serializedEnvelope
   message = await decrypt kmsKey, envelope
   assert.equal (message.to "utf8"), string, "failed to decrypt"
 
