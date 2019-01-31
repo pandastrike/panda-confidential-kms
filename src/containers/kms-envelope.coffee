@@ -3,7 +3,7 @@ import {isType, toJSON, fromJSON} from "panda-parchment"
 Container = ({Envelope, Ciphertext, convert}) ->
 
   class KMSEnvelope
-    constructor: (@envelope, @lockedKey) ->
+    constructor: ({@envelope, @lockedKey}) ->
 
     to: (hint) ->
       output =
@@ -15,19 +15,18 @@ Container = ({Envelope, Ciphertext, convert}) ->
       else
         convert from: "utf8", to: hint, toJSON output
 
-    @create: (envelope, lockedKey) -> new KMSEnvelope envelope, lockedKey
+    @create: (value) -> new KMSEnvelope value
 
     @from: (hint, value) ->
-      {lockedKey, envelope} =
-        if hint == "utf8"
-          fromJSON value
-        else
-          fromJSON convert from: hint, to: "utf8", value
+      new KMSEnvelope do ->
+        {lockedKey, envelope} =
+          if hint == "utf8"
+            fromJSON value
+          else
+            fromJSON convert from: hint, to: "utf8", value
 
-      new KMSEnvelope(
-        Envelope.from "base64", envelope
-        Ciphertext.from "base64", lockedKey
-      )
+        envelope: Envelope.from "base64", envelope
+        lockedKey: Ciphertext.from "base64", lockedKey
 
     @isType: isType @
 

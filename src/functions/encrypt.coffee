@@ -15,7 +15,7 @@ Encrypt = ({encrypt, KMSKey, Message, SymmetricKey,
           "buffer"
         )
 
-      KMSEnvelope.create envelope, lockedKey
+      KMSEnvelope.create {envelope, lockedKey}
 
   encrypt
 
