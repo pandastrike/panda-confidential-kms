@@ -48,7 +48,7 @@
     "panda-9000": "^4.4.0",
     "panda-builder": "^3.2.1",
     "panda-confidential": "file:../panda-confidential",
-    "sundog": "^2.0.0"
+    "sundog": "^3.0.3"
   },
   "dependencies": {
     "panda-generics": "4.2.0",

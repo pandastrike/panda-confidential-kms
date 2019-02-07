@@ -11,7 +11,7 @@ KMSExtension = (confidential, SDK) ->
 
   # Override TweetNaCl's local randomBytes method with KMS
   confidential.randomBytes = (length) ->
-    await confidential.kms.randomKey length, "buffer"
+    await confidential.kms.randomBytes length
 
   # Extend the type system
   Containers confidential
