@@ -47,7 +47,7 @@
     "command-line-args": "^5.0.2",
     "panda-9000": "^4.4.0",
     "panda-builder": "^3.2.1",
-    "panda-confidential": "file:../panda-confidential",
+    "panda-confidential": "^2.0.0",
     "sundog": "^3.0.3"
   },
   "dependencies": {
