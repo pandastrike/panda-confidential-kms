@@ -1,4 +1,4 @@
-import {Method} from "panda-generics"
+import Method from "panda-generics"
 
 Encrypt = ({encrypt, KMSKey, Message, SymmetricKey,
   Ciphertext, kms, KMSEnvelope}) ->

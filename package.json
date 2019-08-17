@@ -1,6 +1,6 @@
 {
   "name": "panda-confidential-kms",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Extension to Panda-Confidential to leverage AWS KMS",
   "main": "build/npm/src/index.js",
   "files": [
@@ -41,18 +41,17 @@
     "url": "https://github.com/pandastrike/panda-confidential-kms/issues"
   },
   "homepage": "https://github.com/pandastrike/panda-confidential-kms#readme",
+  "dependencies": {
+    "panda-generics": "^6.0.0",
+    "panda-parchment": "^5.0.0",
+    "sundog": "^6.0.0"
+  },
   "devDependencies": {
-    "amen": "^2.0.4",
+    "amen": "^3.0.0",
     "aws-sdk": "^2.395.0",
     "command-line-args": "^5.0.2",
-    "panda-9000": "^4.4.0",
-    "panda-builder": "^3.2.1",
-    "panda-confidential": "^2.0.0",
-    "sundog": "^3.0.3"
-  },
-  "dependencies": {
-    "panda-generics": "4.2.0",
-    "panda-parchment": "^4.2.0",
-    "sundog": "^3.0.0"
+    "panda-9000": "^5.0.0",
+    "panda-builder": "^4.0.0",
+    "panda-confidential": "^3.0.0"
   }
 }
