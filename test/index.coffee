@@ -1,3 +1,4 @@
+import "source-map-support/register"
 import parseCLIArgs from "command-line-args"
 
 import Context from "./context"
@@ -13,10 +14,10 @@ options = parseCLIArgs [
 do ->
   try
     console.error "Establishing AWS context..."
-    {Sundog, SDK} = Context options
-    await EstablishKey Sundog
+    sundog = Context options
+    await EstablishKey sundog
   catch e
     console.error "Failed to establish AWS SDK context.", e
     process.exit()
 
-  await Tests SDK
+  await Tests sundog

@@ -7,8 +7,8 @@ import {confidential} from "panda-confidential"
 import KMS from "../../src/index"
 
 
-Tests = (SDK) ->
-  kms = KMS confidential(), SDK
+Tests = (sundog) ->
+  kms = KMS confidential(), sundog.KMS()
   await print await test "Panda Confidential with KMS", [
     test
       description: "Host-Proof Symmetric Encryption"

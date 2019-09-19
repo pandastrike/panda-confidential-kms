@@ -1,17 +1,12 @@
-import Sundog from "sundog"
 import Containers from "./containers"
 import Keys from "./keys"
 import Functions from "./functions"
 
 # Extend Confidential with KMS via sundog.
-KMSExtension = (confidential, SDK) ->
-  # Access to the AWS API through the Sundog helper layer.
-  {AWS:{KMS}} = Sundog SDK
-  confidential.kms = KMS()
-
+KMSExtension = (confidential, kms) ->
   # Override TweetNaCl's local randomBytes method with KMS
-  confidential.randomBytes = (length) ->
-    await confidential.kms.randomBytes length
+  confidential.kms = kms
+  confidential.randomBytes = kms.randomBytes
 
   # Extend the type system
   Containers confidential
